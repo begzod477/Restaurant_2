@@ -95,3 +95,6 @@ class Review(models.Model):
     class Meta:
         verbose_name = 'Izoh'
         verbose_name_plural = 'Izohlar'
+
+    def get_range(self):
+        return [1, 2, 3, 4, 5]

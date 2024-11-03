@@ -7,7 +7,8 @@ class Home(View):
     def get(self, request):
         foods = Food.objects.all() 
         return render(request, 'index.html', {'foods': foods})
-
+    
+   
 class About(View):
     def get(self, request):
         return render(request, 'about.html')
