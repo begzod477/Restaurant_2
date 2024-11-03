@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView
-from .models import Chefs, Category, Food, Booking, Testimonial 
-from . import models
+from .models import Chefs, Category, Food, Booking, Testimonial , Review
 
 class Home(View):
     def get(self, request):
@@ -73,3 +72,8 @@ class MenuView(ListView):
     def get_queryset(self):
         queryset = Category.objects.prefetch_related('foods').all()
         return queryset
+
+class Review(View):
+    def get(self, request):
+        reviews = Review.objects.all()  
+        return render(request, 'index.html', {'reviews': reviews})

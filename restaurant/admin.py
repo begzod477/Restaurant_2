@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Chefs, Food, Category
+from .models import Chefs, Food, Category, Review
 
 # Register your models here.
 
@@ -17,6 +17,11 @@ class FoodAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     prepopulated_fields = {'slug': ('name',)}
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text', 'full_name' )
+    list_display_fields = ('full_name')
 
 
     

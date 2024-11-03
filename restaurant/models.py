@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
@@ -74,3 +76,22 @@ class Testimonial(models.Model):
         verbose_name = 'Testimonial'
         verbose_name_plural = 'Testimonials'
 
+
+class Review(models.Model):
+    text = models.CharField(max_length=75, verbose_name = 'izoh matni')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='foydalanuvchi', related_name='reviews')
+    full_name = models.CharField(max_length=100, verbose_name='To\'liq ismi')
+    rating  = models.IntegerField(validators=[
+        MinValueValidator(1 , "kamida 1 ta bo'lishi kerak"),
+        MaxValueValidator(5, "eng ko'pi 5 ta bo'lishi kerak")
+    ], verbose_name='bahosi')
+    created = models.DateTimeField(auto_now_add=True, verbose_name="izoh qo'shilgan vaqti")
+    profession = models.CharField(max_length=100, null=True, verbose_name='kasbi')
+
+
+    def __str__(self):
+        return f"{self.full_name} | {self.text[:100]}"
+
+    class Meta:
+        verbose_name = 'Izoh'
+        verbose_name_plural = 'Izohlar'
