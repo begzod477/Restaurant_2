@@ -90,6 +90,16 @@
                                 <h5 class="mb-1">{{ review.full_name }}</h5>
                                 <small>{{ review.profession }}</small> 
                             </div>
+                            <div class="d-flex pe-5">
+                                {% for i in review.get_range %}
+                                {% if i < review.rating %}
+                                <i class="fas fa-star text-primary"></i>
+                                {% else %}
+                                <i class="fas fa-star"></i>
+                                {% endif %}
+                                {% endfor %}
+
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
