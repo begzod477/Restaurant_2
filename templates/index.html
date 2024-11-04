@@ -1,1 +1,85 @@
 {% extends 'base.html' %}
+
+
+
+{% block hero  %}
+<style>
+    /* From Uiverse.io by andrew-demchenk0 */
+.rating:not(:checked) > input {
+  position: absolute;
+  appearance: none;
+}
+
+.rating:not(:checked) > label {
+  float: right;
+  cursor: pointer;
+  font-size: 30px;
+  color: #666;
+}
+
+.rating:not(:checked) > label:before {
+  content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #e58e09;
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ff9e0b;
+}
+
+.rating > input:checked ~ label {
+  color: #ffa723;
+}
+</style>
+
+
+{% endblock hero %}
+
+{% block content %}
+
+
+      <!-- Testimonial Start -->
+      <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="text-center">
+                <h5 class="section-title ff-secondary text-center text-primary fw-normal">Testimonial</h5>
+                <h1 class="mb-5">Our Clients Say!!!</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel">
+                {% for reviews in review %}
+                <div class="testimonial-item bg-transparent border rounded p-4">
+
+                    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                    <p>{{ review.text }}</p>
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 50px; height: 50px;">
+                        <div class="ps-3">
+                            <h5 class="mb-1">{{ review.full_name }}</h5>
+                            <small>{{ review.profession }}</small> 
+                        </div>
+                        <div class="d-flex pe-5">
+                            {% for i in review.get_range %}
+                            {% if i < review.rating %}
+                            <i class="fas fa-star text-primary"></i>
+                            {% else %}
+                            <i class="fas fa-star"></i>
+                            {% endif %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+    
+{% endblock %}

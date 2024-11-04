@@ -52,31 +52,6 @@ class Food(models.Model):
         verbose_name_plural = 'Ovqatlar'
 
 
-class Booking(models.Model):
-    customer_name = models.CharField(max_length=100, verbose_name='Mijoz ismi')
-    booking_date = models.DateTimeField(verbose_name='Buyurtma sanasi')
-    people_count = models.IntegerField(default=1, verbose_name='Insonlar soni')
-    special_requests = models.TextField(blank=True, verbose_name='Maxsus talablar')
-
-    def __str__(self):
-        return self.customer_name
-
-    class Meta:
-        verbose_name = 'Buyurtma'
-        verbose_name_plural = 'Buyurtmalar'
-class Testimonial(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Ismi')
-    message = models.TextField(verbose_name='Xabar')
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Yaratilgan vaqt')
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'Testimonial'
-        verbose_name_plural = 'Testimonials'
-
-
 class Review(models.Model):
     text = models.CharField(max_length=75, verbose_name = 'izoh matni')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='foydalanuvchi', related_name='reviews')
